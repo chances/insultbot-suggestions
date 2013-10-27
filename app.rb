@@ -1,7 +1,5 @@
-require 'rubygems'
-
-ENV['GEM_PATH'] = '/u/chances/.gem/ruby/1.8/'
 require 'sinatra'
+require 'active_record'
 require 'pg'
 
 class InsultsApp < Sinatra::Base
