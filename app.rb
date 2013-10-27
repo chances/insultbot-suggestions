@@ -1,10 +1,17 @@
-require 'sinatra'
 require 'active_record'
 require 'pg'
+require 'sinatra'
+require 'db/sinatra/activerecord'
+
+require 'db/insult'
 
 class InsultsApp < Sinatra::Base
-#Super simple sinatra app
+    register Sinatra::ActiveRecordExtension
+
+    #Setup active record with Sinatra
+    set :database_file, 'database.yml'
+
     get '/' do
-        'This is a simple app!'
+        "There are #{Insult.count} insults."
     end
 end
