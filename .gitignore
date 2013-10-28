@@ -1,3 +1,6 @@
 Gemfile*
+dispatch.fcgi
 database.yml
 database.log
+db/db.log
+cgi.log

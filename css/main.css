@@ -1,0 +1,56 @@
+body {
+    background: rgba(200,200,200,0.2);
+}
+
+.navbar-default .navbar-brand, .navbar-default .navbar-brand:hover {
+    color: #555 !important;
+    position: relative;
+    top: -5px;
+    left: 5px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    cursor: default;
+}
+
+.container {
+    width: auto;
+    max-width: 720px;
+    padding: 0 15px;
+}
+
+.glyphicon-ok-circle {
+    color: green;
+}
+.glyphicon-warning-sign {
+    color: #EC971F;
+}
+.glyphicon-exclamation-sign {
+    color: #C9302C;
+}
+
+#content {
+    padding-top: 60px;
+}
+
+.host h3 > .glyphicon-warning-sign {
+    text-shadow: 0 0 1.5em rgba(236,151,31,0.8);
+}
+.host h3 > .glyphicon-exclamation-sign {
+    text-shadow: 0 0 1.5em rgba(201,48,44,0.8);
+}
+
+.table-striped > tbody > tr:nth-child(odd) > td:first-child {
+    border-bottom-left-radius: 4px;
+}
+.table-striped > tbody > tr:nth-child(odd) > td:last-child {
+    border-bottom-right-radius: 4px;
+}
+
+.table-striped > tbody > tr > td > a {
+    cursor: pointer;
+}
+.table-striped > tbody > tr > td > .glyphicon-question-sign {
+    color: slategray;
+}

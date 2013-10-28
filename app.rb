@@ -1,6 +1,5 @@
 require 'active_record'
 require 'pg'
-require 'sinatra'
 require 'db/sinatra/activerecord'
 
 require 'db/insult'
@@ -12,6 +11,21 @@ class InsultsApp < Sinatra::Base
     set :database_file, 'database.yml'
 
     get '/' do
-        "There are #{Insult.count} insults."
+        @insult_count = Insult.approved.count
+        erb "<h1>Submit an Insult <small>#{request.path_info}</small></h1>"
+    end
+
+    get '/login' do
+        erb :login
+    end
+
+    helpers do
+        def show_sign_in
+            request.path_info != '/admin'
+        end
+
+        def href(reference)
+            "/~chances/insults#{reference}"
+        end
     end
 end
