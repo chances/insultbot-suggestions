@@ -11,11 +11,19 @@
         <div class="navbar navbar-default navbar-fixed-top">
             <div class="container">
                 <div class="navbar-header">
-                    <span class="navbar-brand">Insults</span>
+                    <a class="navbar-brand" href="<%= href('/') %>">InsultBot</a>
+                    <% if defined? @insult_count %>
+                    <p class="navbar-text"><%= @insult_count %> insults, and counting!</p>
+                    <% end %>
+                </div>
+                <div class="collapse navbar-collapse navbar-ex4-collapse">
+                    <% if show_sign_in %>
+                    <a class="btn btn-default navbar-btn pull-right" href="<%= href('/login') %>">Sign In</a>
+                    <% end %>
                 </div>
             </div>
         </div>
-        <div id="content">
+        <div id="content" class="container">
             <%= yield %>
         </div>
     </body>

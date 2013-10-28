@@ -3,15 +3,11 @@ body {
 }
 
 .navbar-default .navbar-brand, .navbar-default .navbar-brand:hover {
-    color: #555 !important;
-    position: relative;
-    top: -5px;
-    left: 5px;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-    cursor: default;
+    cursor: pointer;
 }
 
 .container {
@@ -32,6 +28,12 @@ body {
 
 #content {
     padding-top: 60px;
+}
+
+#login {
+    margin: 40px auto;
+    width: 400px;
+    max-width: 400px;
 }
 
 .host h3 > .glyphicon-warning-sign {
