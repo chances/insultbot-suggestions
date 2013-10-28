@@ -6,19 +6,23 @@
         <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-theme.min.css">
         <link rel="stylesheet" href="css/main.css">
+
+        <script src="js/zepto.min.js"></script>
+        <script src="js/fx.js"></script>
+        <%= get_scripts %>
     </head>
     <body>
         <div class="navbar navbar-default navbar-fixed-top">
             <div class="container">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="<%= href('/') %>">InsultBot</a>
+                    <a class="navbar-brand" href="<%= href('/') %>">InsultBot Suggestions</a>
                     <% if defined? @insult_count %>
                     <p class="navbar-text"><%= @insult_count %> insults, and counting!</p>
                     <% end %>
                 </div>
                 <div class="collapse navbar-collapse navbar-ex4-collapse">
                     <% if show_sign_in %>
-                    <a class="btn btn-default navbar-btn pull-right" href="<%= href('/login') %>">Sign In</a>
+                    <a class="btn btn-default navbar-btn pull-right" href="<%= href('/login') %>">Sign in</a>
                     <% end %>
                 </div>
             </div>
