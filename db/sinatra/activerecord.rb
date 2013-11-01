@@ -44,7 +44,7 @@ module Sinatra
     protected
 
     def self.registered(app)
-      app.set :activerecord_logger, Logger.new(File.open('db/db.log', 'a'))
+      app.set :activerecord_logger, Logger.new(File.open('database.log', 'a'))
       app.set :database_spec, ENV['DATABASE_URL']
       app.set :database_file, "config/database.yml"
       app.database if app.database_spec
