@@ -1,70 +1,303 @@
+/* line 1, ../scss/_animate.scss */
+.animated {
+  -webkit-animation-fill-mode: both;
+  -moz-animation-fill-mode: both;
+  -ms-animation-fill-mode: both;
+  -o-animation-fill-mode: both;
+  animation-fill-mode: both;
+  -webkit-animation-duration: 0.6s;
+  -moz-animation-duration: 0.6s;
+  -ms-animation-duration: 0.6s;
+  -o-animation-duration: 0.6s;
+  animation-duration: 0.6s;
+}
+
+@-webkit-keyframes shake {
+  /* line 15, ../scss/_animate.scss */
+  0%, 100% {
+    -webkit-transform: translateX(0);
+  }
+
+  /* line 16, ../scss/_animate.scss */
+  15%, 45%, 75%, 95% {
+    -webkit-transform: translateX(-10px);
+  }
+
+  /* line 17, ../scss/_animate.scss */
+  30%, 60%, 90% {
+    -webkit-transform: translateX(10px);
+  }
+}
+
+@-moz-keyframes shake {
+  /* line 21, ../scss/_animate.scss */
+  0%, 100% {
+    -moz-transform: translateX(0);
+  }
+
+  /* line 22, ../scss/_animate.scss */
+  10%, 30%, 50%, 70%, 90% {
+    -moz-transform: translateX(-10px);
+  }
+
+  /* line 23, ../scss/_animate.scss */
+  20%, 40%, 60%, 80% {
+    -moz-transform: translateX(10px);
+  }
+}
+
+@-o-keyframes shake {
+  /* line 27, ../scss/_animate.scss */
+  0%, 100% {
+    -o-transform: translateX(0);
+  }
+
+  /* line 28, ../scss/_animate.scss */
+  10%, 30%, 50%, 70%, 90% {
+    -o-transform: translateX(-10px);
+  }
+
+  /* line 29, ../scss/_animate.scss */
+  20%, 40%, 60%, 80% {
+    -o-transform: translateX(10px);
+  }
+}
+
+@keyframes shake {
+  /* line 33, ../scss/_animate.scss */
+  0%, 100% {
+    transform: translateX(0);
+  }
+
+  /* line 34, ../scss/_animate.scss */
+  10%, 30%, 50%, 70%, 90% {
+    transform: translateX(-10px);
+  }
+
+  /* line 35, ../scss/_animate.scss */
+  20%, 40%, 60%, 80% {
+    transform: translateX(10px);
+  }
+}
+
+/* line 38, ../scss/_animate.scss */
+.shake {
+  -webkit-animation-name: shake;
+  -moz-animation-name: shake;
+  -o-animation-name: shake;
+  animation-name: shake;
+}
+
+/* line 3, ../scss/main.scss */
 body {
-    background: rgba(200,200,200,0.2);
+  background: #F2F4F4;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 1px 2px rgba(0, 0, 0, 0.075);
 }
 
-.navbar-default .navbar-brand, .navbar-default .navbar-brand:hover {
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    cursor: pointer;
+/* line 8, ../scss/main.scss */
+.navbar {
+  background-image: none;
+  background: #F3F3F3;
+  box-shadow: none;
+}
+/* line 13, ../scss/main.scss */
+.navbar .navbar-nav > .active > a {
+  background-color: #f2f2f2;
 }
 
+/* line 17, ../scss/main.scss */
+.navbar-header {
+  padding-left: 15px;
+}
+
+/* line 20, ../scss/main.scss */
+.navbar-default .navbar-brand {
+  font-weight: bolder;
+  padding-left: 50px;
+  background: url(../icon.png) no-repeat left -2px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  cursor: pointer;
+}
+
+/* line 30, ../scss/main.scss */
+.navbar-collapse .navbar-text {
+  margin-right: 15px !important;
+}
+
+/* line 34, ../scss/main.scss */
 .container {
-    width: auto;
-    max-width: 720px;
-    padding: 0 15px;
-}
-#content .container.fixed {
-    position: fixed;
-    width: 100%;
+  width: auto;
+  max-width: 1024px;
+  padding: 0 15px;
 }
 
-.glyphicon-ok-circle {
-    color: green;
-}
-.glyphicon-warning-sign {
-    color: #EC971F;
-}
-.glyphicon-exclamation-sign {
-    color: #C9302C;
-}
-
+/* line 39, ../scss/main.scss */
 #content {
-    padding-top: 60px;
+  padding-top: 51px;
+}
+/* line 42, ../scss/main.scss */
+#content .container.fixed {
+  position: fixed;
+  width: 100%;
+}
+/* line 47, ../scss/main.scss */
+#content > .container {
+  padding: 0 15px 15px 15px;
+  background-color: #455459;
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
+  -moz-box-shadow: 0 8px 20px rgba(0, 0, 0, 0.45), inset 0 -4px 2px rgba(0, 0, 0, 0.55);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.45), inset 0 -4px 2px rgba(0, 0, 0, 0.55);
+  z-index: 2;
+}
+/* line 56, ../scss/main.scss */
+#content > .container .inset {
+  margin: 0;
+  padding: 15px;
 }
 
+/* line 63, ../scss/main.scss */
+.glyphicon-ok-circle {
+  color: green;
+}
+
+/* line 66, ../scss/main.scss */
+.glyphicon-warning-sign {
+  color: #EC971F;
+}
+
+/* line 69, ../scss/main.scss */
+.glyphicon-exclamation-sign {
+  color: #C9302C;
+}
+
+/* line 73, ../scss/main.scss */
 .panel-form {
-    margin: 65px auto;
+  margin: 65px auto;
 }
+
+/* line 76, ../scss/main.scss */
 .alert-dismissable .close {
-    top: 0px;
-}
-#submitInsult {
-    width: 525px;
-}
-#login {
-    width: 400px;
-    max-width: 400px;
+  top: 0px;
 }
 
+/* line 79, ../scss/main.scss */
+#signupPanel.center-vert {
+  top: 18px;
+}
+
+/* line 82, ../scss/main.scss */
+#submitInsultPanel {
+  top: 18px;
+}
+/* line 85, ../scss/main.scss */
+#submitInsultPanel.center-vert {
+  top: 30px;
+}
+/* line 89, ../scss/main.scss */
+#submitInsultPanel textarea {
+  resize: none;
+}
+
+/* line 93, ../scss/main.scss */
+#insertNick {
+  position: relative;
+  top: 2px;
+}
+
+/* line 97, ../scss/main.scss */
+#loginPanel {
+  width: 415px;
+}
+
+/* line 100, ../scss/main.scss */
+#login .text-danger {
+  position: relative;
+  top: 7px;
+}
+
+/* line 104, ../scss/main.scss */
+.jumbotron {
+  color: #FFFFFF;
+  text-shadow: 0 1px 5px #222222;
+  margin-top: 25px;
+  background-color: #455459;
+  min-height: 383px;
+  -moz-box-shadow: 0 8px 20px rgba(0, 0, 0, 0.45), inset 0 -4px 2px rgba(0, 0, 0, 0.55);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.45), inset 0 -4px 2px rgba(0, 0, 0, 0.55);
+}
+/* line 112, ../scss/main.scss */
+.jumbotron.landing:not(.no-insults) {
+  margin: 0;
+  -moz-box-shadow: 0 8px 20px rgba(0, 0, 0, 0.45);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.45);
+  border-radius: 0;
+  z-index: 1;
+}
+/* line 119, ../scss/main.scss */
+.jumbotron h1 {
+  margin-top: 0;
+}
+/* line 122, ../scss/main.scss */
+.jumbotron .panel-form {
+  font-size: 14px;
+  margin: 0 0 0 5px;
+  position: relative;
+  top: 0px;
+  width: 350px;
+  -moz-transition: top 0.3s ease;
+  transition: top 0.3s ease;
+}
+
+/* line 131, ../scss/main.scss */
+.panel-form {
+  text-shadow: none;
+  -webkit-animation-duration: 0.5s;
+  -moz-animation-duration: 0.5s;
+  -ms-animation-duration: 0.5s;
+}
+/* line 137, ../scss/main.scss */
+.panel-form .form-group {
+  color: #333;
+}
+/* line 140, ../scss/main.scss */
+.panel-form .help-block {
+  color: #737373 !important;
+}
+
+/* line 144, ../scss/main.scss */
+.clearfix:after {
+  clear: both;
+  *zoom: 1;
+  height: 0;
+  visibility: hidden;
+  display: block;
+}
+
+/* line 152, ../scss/main.scss */
 .host h3 > .glyphicon-warning-sign {
-    text-shadow: 0 0 1.5em rgba(236,151,31,0.8);
+  text-shadow: 0 0 1.5em rgba(236, 151, 31, 0.8);
 }
+
+/* line 155, ../scss/main.scss */
 .host h3 > .glyphicon-exclamation-sign {
-    text-shadow: 0 0 1.5em rgba(201,48,44,0.8);
+  text-shadow: 0 0 1.5em rgba(201, 48, 44, 0.8);
 }
 
+/* line 159, ../scss/main.scss */
 .table-striped > tbody > tr:nth-child(odd) > td:first-child {
-    border-bottom-left-radius: 4px;
-}
-.table-striped > tbody > tr:nth-child(odd) > td:last-child {
-    border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
 }
 
-.table-striped > tbody > tr > td > a {
-    cursor: pointer;
+/* line 162, ../scss/main.scss */
+.table-striped > tbody > tr:nth-child(odd) > td:last-child {
+  border-bottom-right-radius: 4px;
 }
-.table-striped > tbody > tr > td > .glyphicon-question-sign {
-    color: slategray;
+
+/* line 166, ../scss/main.scss */
+.table-striped > tbody > tr > td > a {
+  cursor: pointer;
 }
