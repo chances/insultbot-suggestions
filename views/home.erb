@@ -1,0 +1,50 @@
+<% if show_sign_in %>
+<div class="jumbotron">
+    <div id="signupPanel" class="panel panel-default panel-form center-vert pull-right">
+        <div class="panel-body">
+        <form id="signup" method="post" action="<%= href('/signup') %>">
+            <div class="form-group">
+                <input id="username" class="form-control" name="username" type="text" maxlength="20" placeholder="Pick a username" autofocus />
+                <span class="help-block">You may set an alias later.</span>
+            </div>
+            <div class="form-group">
+                <input id="email" class="form-control" name="email" type="email" maxlength="255" placeholder="Your email" />
+            </div>
+            <div class="form-group">
+                <input id="password" class="form-control" name="password" type="password" maxlength="75" placeholder="Create a password" />
+            </div>
+            <p class="text-danger">You must specify <span id="error"></span>.</p>
+            <button type="submit" class="btn btn-primary btn-block">Signup to suggest an insult</button>
+        </form>
+        </div>
+    </div>
+    <h1>Insult your fellow gnarwals with InsultBot.</h1>
+    <p class="clearfix">Get help with InsultBot and contribute your homegrown insults.</p>
+</div>
+<% else %>
+<div class="jumbotron landing<%= ' no-insults' if current_user.insults.count == 0 %>">
+	<div id="submitInsultPanel" class="panel panel-default panel-form center-vert pull-right">
+	    <div class="panel-body">
+	        <form id="submitInsult" method="post" action="<%= href('/insult') %>">
+	            <div class="form-group">
+	                <label class="control-label" for="insult">Make a Suggestion</label>
+	                <button id="insertNick" class="btn btn-default btn-xs pull-right" type="button">Insert nick placeholder</button>
+	                <textarea id="insult" class="form-control clearfix" name="insult" rows="3" autofocus></textarea>
+	                <span class="help-block"><span class="glyphicon glyphicon-warning-sign"></span> Your suggestions are moderated.</span>
+	            </div>
+	            <p id="error" class="text-danger">You must specify an insult.</p>
+	            <button class="btn btn-primary btn-block" type="submit">Suggest an insult</button>
+	        </form>
+	    </div>
+	</div>
+	<h1>Insult your fellow gnarwals with InsultBot.</h1>
+	<p class="clearfix">Get help with InsultBot and contribute your homegrown insults.</p>
+</div>
+<% if current_user.insults.count > 0 %>
+<div class="container">
+	<div class="inset panel panel-default">
+		<h1>Your Insults</h1>
+	</div>
+</div>
+<% end %>
+<% end %>

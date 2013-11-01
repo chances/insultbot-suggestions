@@ -1,7 +1,9 @@
 <!DOCTYPE HTML>
 <html>
     <head>
-        <title>InsultBot Insults</title>
+        <title>InsultBot</title>
+        
+        <link rel="shortcut icon" href="<%= href('/favicon.ico') %>" type="image/x-icon" />
 
         <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-theme.min.css">
@@ -15,14 +17,19 @@
         <div class="navbar navbar-default navbar-fixed-top">
             <div class="container">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="<%= href('/') %>">InsultBot Suggestions</a>
-                    <% if defined? @insult_count %>
-                    <p class="navbar-text"><%= @insult_count %> insults, and counting!</p>
-                    <% end %>
+                    <a class="navbar-brand" href="<%= href('/') %>">InsultBot</a>
                 </div>
                 <div class="collapse navbar-collapse navbar-ex4-collapse">
+                    <ul class="nav navbar-nav">
+                        <li<%= class_attr('/help', ['active']) %>><a href="<%= href('/help') %>">Help</a></li>
+                        <li<%= class_attr('/report', ['active']) %>><a href="<%= href('/report') %>">Report an Insult</a></li>
+                        <li<%= class_attr('/about', ['active']) %>><a href="<%= href('/about') %>">About</a></li>
+                    </ul>
                     <% if show_sign_in %>
                     <a class="btn btn-default navbar-btn pull-right" href="<%= href('/login') %>">Sign in</a>
+                    <% else %>
+                    <a class="btn btn-default navbar-btn pull-right" href="<%= href('/logout', {'continue' => @request.path_info}) %>">Sign out</a>
+                    <p class="navbar-text pull-right">Signed in as <a href="<%= href('/profile') %>" class="navbar-link"><%= current_user.username %></a></p>
                     <% end %>
                 </div>
             </div>
