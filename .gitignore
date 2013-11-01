@@ -1,6 +1,11 @@
-Gemfile*
-dispatch.fcgi
+scss/
+
+cgi.log
 database.yml
 database.log
+dispatch.fcgi
+Gemfile*
+
+*~
+
 db/db.log
-cgi.log

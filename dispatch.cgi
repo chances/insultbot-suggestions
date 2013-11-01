@@ -19,6 +19,18 @@ module Rack
     def path_info=(s)
       @env["REDIRECT_URL"] = s.to_s
     end
+    def url
+      url = scheme + "://"
+      url << host
+
+      if scheme == "https" && port != 443 ||
+        scheme == "http" && port != 80
+        url << ":#{port}"
+      end
+
+      url << fullpath
+      url.sub('/dispatch.cgi', '')
+    end
   end
 end
 
