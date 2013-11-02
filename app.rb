@@ -6,9 +6,9 @@ require 'warden'
 require 'active_record'
 require 'pg'
 require 'db/sinatra/activerecord'
-
 require 'hash'
 require 'erb_namespace'
+require 'ldap'
 require 'db/models'
 
 class InsultsApp < Sinatra::Base
@@ -65,25 +65,76 @@ class InsultsApp < Sinatra::Base
     @request = request
     erb :home
   end
-  
+  get '/help' do
+    @request = request
+    erb :help
+  end
+  get '/about' do
+    @request = request
+    @status_code = ''
+    @status = 'Coming Soon'
+    @message = 'This page is coming soon.'
+    erb :error
+  end
+  get '/report' do
+    redirect href('/login', {'continue' => '/report'}) unless warden_handler.authenticated?
+    
+    @request = request
+    @status_code = ''
+    @status = 'Coming Soon'
+    @message = 'This feature is coming soon.'
+    erb :error
+  end
+
   post '/insult' do
     #TODO: Write insult submit stuffs
     redirect href('/')
   end
+  
+  get '/profile' do
+      redirect href('/login', {'continue' => '/profile'}) unless warden_handler.authenticated?
+      
+      @request = request
+      @status_code = ''
+      @status = 'Coming Soon'
+      @message = 'Your profile page is coming soon.'
+      erb :error
+    end
 
   post '/signup' do
     username = params[:username]
-    email = params[:email]
     password = params[:password]
-    User.create do |u|
-      u.username = username
-      u.email = email
-      u.password = Digest::SHA1.hexdigest("#{salt}#{password}")
-    end
-
+    
+    #Try to authenticate with our User database
     warden_handler.authenticate
-
-    redirect href('/')
+    if warden_handler.authenticated?
+      redirect href('/')
+    else
+      #Try to authenticate with CAT LDAP
+      email = Insults::LDAP.authenticate(username, password)
+      if not email
+        #Fail
+        @request = request
+        @success = false
+        erb :home
+      else
+        #User exists in CAT LDAP
+        #Add the user to our User database
+        user = User.create do |u|
+          u.username = username
+          u.email = email
+          u.password = Digest::SHA1.hexdigest("#{salt}#{password}")
+        end
+  
+        env['warden'].set_user(user)
+        
+        if warden_handler.authenticated?
+          redirect href('/')
+        else
+          redirect href('/login')
+        end
+      end
+    end
   end
 
   get '/login' do
@@ -94,15 +145,27 @@ class InsultsApp < Sinatra::Base
     @request = request
     warden_handler.authenticate
     if warden_handler.authenticated?
-      redirect href('/')
+      if params.has_key?('continue')
+        redirect href(params[:continue])
+      else
+        redirect href('/')
+      end
     else
       @success = false
       erb :login
     end
   end
   get '/logout' do
-    warden_handler.logout
-    redirect href(params[:continue])
+    if warden_handler.authenticated?
+      warden_handler.logout
+      if params.has_key?('continue')
+        redirect href(params[:continue])
+      else
+        redirect href('/')
+      end
+    else
+      redirect href('/')
+    end
   end
   post '/unauthenticated' do
     redirect href('/login')
@@ -115,6 +178,8 @@ class InsultsApp < Sinatra::Base
       case path
       when '/'
         (show_sign_in) ? template.erb({:scripts => ['js/signup.js']}) : template.erb({:scripts => ['js/submit.js']})
+      when '/signup'
+        template.erb({:scripts => ['js/signup.js']})
       when '/login'
         template.erb({:scripts => ['js/login.js']})
       else
@@ -123,7 +188,7 @@ class InsultsApp < Sinatra::Base
     end
 
     def href(reference, hash={})
-      return '#' if request.path_info == reference
+      return '#' if request.path_info == reference && hash.empty?
       url = "/~chances/insults#{reference}"
       url_args = ''
       if hash.empty?

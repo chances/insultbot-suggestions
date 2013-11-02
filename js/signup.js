@@ -9,63 +9,42 @@ $(function () {
     	$signupPanel = $('#signupPanel'),
         $errorMsg = $('#error'),
         $username = $('#username'),
-        $email = $('#email'),
         $password = $('#password'),
+        $authError = $('#authError'),
         $error = $errorMsg.parent();
 
+    console.log($authError.size());
+    if ($authError.size()) {
+    	$signupPanel.removeClass('center-vert');
+    	$username.focus().parent().addClass('has-error');
+    	$password.parent().addClass('has-error');
+    }
     $error.hide();
 
     $signup.submit(function (event) {
         //Remove error from form
     	$signup.removeClass('has-error');
         $signup.find('.form-group').removeClass('has-error');
-        $signupPanel.addClass('center-vert');
+        if ($signupPanel.hasClass('center-vert') === false) {
+            $signupPanel.addClass('center-vert');
+        }
+        $authError.remove();
         vals = {};
         vals['u'] = $username.val().replace(/\s+/g, '');
-        vals['e'] = $email.val().replace(/\s+/g, '');
         vals['p'] = $password.val().replace(/\s+/g, '');
-        console.log(vals);
         //Check for errors
-        if (!vals['u'] || !vals['e'] || !vals['p']) {
+        if (!vals['u'] || !vals['p']) {
             //Formulate error message
             var message = "";
-            if (!vals['u'] && !vals['e'] && vals['p']) {
-                message = "a username and an email address";
-                $username.focus().parent().addClass('has-error');
-                $email.parent().addClass('has-error');
-            } else if (!vals['u'] && vals['e'] && vals['p']) {
+            if (!vals['u'] && vals['p']) {
                 message = "a username";
                 $username.focus().parent().addClass('has-error');
-            } else if (vals['u'] && !vals['e'] && !vals['p']) {
-                message = "an email address and password";
-                $email.focus().parent().addClass('has-error');
-                $password.parent().addClass('has-error');
-            } else if (vals['u'] && vals['e'] && !vals['p']) {
+            } else if (vals['u'] && !vals['p']) {
                 message = "a password";
                 $password.focus().parent().addClass('has-error');
-            } else if (vals['u'] && !vals['e'] && !vals['p']) {
-                message = "an email address and a password";
-                $email.focus().parent().addClass('has-error');
-                $password.parent().addClass('has-error');
-            } else if (vals['u'] && !vals['e'] && vals['p']) {
-                message = "an email address";
-                $email.focus().parent().addClass('has-error');
-            } else if (!vals['u'] && vals['e'] && vals['p']) {
-                message = "a username and a password";
-                $username.focus().parent().addClass('has-error');
-                $password.parent().addClass('has-error');
-            } else if (vals['u'] && !vals['e'] && vals['p']) {
-                message = "a username and a password";
-                $username.focus().parent().addClass('has-error');
-                $password.parent().addClass('has-error');
-            } else if (!vals['u'] && vals['e'] && !vals['p']) {
+            } else if (!vals['u'] && !vals['p']) {
                 message = "a username and password";
                 $username.focus().parent().addClass('has-error');
-                $password.parent().addClass('has-error');
-            } else if (!vals['u'] && !vals['e'] && !vals['p']) {
-                message = "all fields";
-                $username.focus().parent().addClass('has-error');
-                $email.parent().addClass('has-error');
                 $password.parent().addClass('has-error');
             }
 

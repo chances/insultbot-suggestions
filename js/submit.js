@@ -18,13 +18,17 @@ $(function () {
 		parts.push(val.substring(0, selStart));
 		parts.push('<NICK>');
 		parts.push(val.substring(selEnd));
-		$insult.text(parts.join(''));
+		$insult.val(parts.join(''));
 		if (selStart == selEnd) {
 			selEnd = selStart += 6;
 		} else {
 			selEnd = selStart + 6;
 		}
 		$insult.prop('selectionStart', selStart).prop('selectionEnd', selEnd);
+		//Remove error from form
+        $submitInsult.find('.form-group').removeClass('has-error');
+        $submitInsultPanel.addClass('center-vert');
+        $error.hide();
 	});
 	
 	$insult.on('mousemove', function () {

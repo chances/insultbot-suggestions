@@ -1,0 +1,13 @@
+<h1>How to Use InsultBot</h1>
+<p>Insulting your friends with InsultBot is easy. Just say any of the following commands in a channel where InsultBot is present.</p>
+<div class="code">
+	<pre>$ <span class="bold">!insultbot</span> help<span class="desc pull-right">Get help with InsultBot within IRC.</span></pre>
+	<pre>$ <span class="bold">!insultbot</span> greet <span class="emphasis">&lt;NICK&gt;</span><span class="desc pull-right">Greet (insult) someone. Replace &lt;NICK&gt; with their nickname.</span></pre>
+	<pre>$ <span class="bold">insult:</span> <span class="emphasis">&lt;NICK&gt;</span><span class="desc pull-right">An alias for the greet command.</span></pre>
+</div>
+<h2>Need more help?</h2>
+<% if show_sign_in %>
+<p><a href="<%= href('/login', {'continue' => '/help'}) %>">Sign in</a> to submit a question or concern.</p>
+<% else %>
+<!-- TODO: Create help form. -->
+<% end %>
