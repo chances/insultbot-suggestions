@@ -84,7 +84,13 @@ class InsultsApp < Sinatra::Base
   end
 
   post '/insult' do
-    #TODO: Write insult submit stuffs
+    redirect href('/login', {'continue' => '/'}) unless warden_handler.authenticated?
+    if params['insult']
+      #Add the insult to the Insults database
+      current_user.insults.create do |insult|
+        insult.insult = params['insult']
+      end
+    end
     redirect href('/')
   end
   
@@ -201,6 +207,19 @@ class InsultsApp < Sinatra::Base
       return '' if reference != request.path_info && default_classes.empty?
       return " class=\"#{default_classes.join(' ')}\"" if reference != request.path_info
       " class=\"#{(classes + default_classes).join(' ')}\""
+    end
+    
+    def h(escape_str)
+      Rack::Utils.escape_html(escape_str)
+    end
+    
+    def insult(insult_str)
+      username = (current_user.alias.nil?)? current_user.username : current_user.alias
+      h(insult_str.gsub('<NICK>', username))
+    end
+    
+    def date(date_str)
+      date_str.strftime('%a, %b %d, %Y at %l:%M %p')
     end
 
     def warden_handler

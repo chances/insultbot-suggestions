@@ -49,7 +49,27 @@
 <% if current_user.insults.count > 0 %>
 <div class="container">
 	<div class="inset panel panel-default">
-		<h1>Your Insults</h1>
+		<h2>Your Insults</h2>
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<!-- Approved -->
+					<td colspan="2">Insult</td>
+					<td>Created</td>
+					<!-- Edit/Delete -->
+				</tr>
+			</thead>
+			<tbody>
+				<% for @insult in current_user.insults %>
+				<tr data-insult-id="<%= @insult.id %>">
+					<td class="fit-to-content"><span class="glyphicon <%= (@insult.approved) ? 'glyphicon-ok' : 'glyphicon-remove' %>" title="<%= (@insult.approved) ? 'Approved' : ((@insult.published) ? 'Denied' : 'Awaiting Approval') %>"></span></td>
+					<td><%=insult @insult.insult %></td>
+					<td><%=date @insult.created_at %></td>
+					<td class="fit-to-content"><button class="btn btn-sm btn-default edit">Edit</button><button class="btn btn-sm btn-danger delete">Delete</button><button class="btn btn-sm btn-primary save">Save</button><button class="btn btn-sm btn-default cancel">Cancel</button></td>
+				</tr>
+				<% end %>
+			</tbody>
+		</table>
 	</div>
 </div>
 <% end %>

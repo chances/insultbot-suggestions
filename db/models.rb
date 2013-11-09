@@ -12,6 +12,8 @@ class User < ActiveRecord::Base
 end
 
 class Insult < ActiveRecord::Base
+  validate :insult, :author_id, :presence => true
+  
   belongs_to :user, :inverse_of => :insults, :foreign_key => 'author_id'
   
   def self.approved
