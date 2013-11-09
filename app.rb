@@ -71,17 +71,14 @@ class InsultsApp < Sinatra::Base
   end
   get '/about' do
     @request = request
-    @status_code = ''
-    @status = 'Coming Soon'
-    @message = 'This page is coming soon.'
-    erb :error
+    erb :about
   end
   get '/report' do
     redirect href('/login', {'continue' => '/report'}) unless warden_handler.authenticated?
     
     @request = request
     @status_code = ''
-    @status = 'Coming Soon'
+    @status = 'Report an Insult <small>Coming Soon</small>'
     @message = 'This feature is coming soon.'
     erb :error
   end
@@ -96,8 +93,8 @@ class InsultsApp < Sinatra::Base
       
       @request = request
       @status_code = ''
-      @status = 'Coming Soon'
-      @message = 'Your profile page is coming soon.'
+      @status = 'Your Profile <small>Coming Soon</small>'
+      @message = 'This page is coming soon.'
       erb :error
     end
 
