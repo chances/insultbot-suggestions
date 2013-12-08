@@ -5,6 +5,7 @@ require 'digest/sha1'
 require 'warden'
 require 'active_record'
 require 'pg'
+require 'json'
 require 'db/sinatra/activerecord'
 require 'hash'
 require 'erb_namespace'
@@ -93,6 +94,65 @@ class InsultsApp < Sinatra::Base
     end
     redirect href('/')
   end
+  post '/insult/:id' do
+    response = {}
+    begin
+      id = Integer(params[:id])
+      if params['insult'] and (warden_handler.authenticated? or current_user.admin)
+        begin
+          insult = nil
+          if current_user.admin
+            insult = Insult.find(id)
+          else
+            insult = current_user.insults.find(id)
+          end
+          insult.with_lock do
+            insult.insult = params['insult']
+            insult.approved = false
+            insult.published = false
+            insult.save
+          end
+          response['success'] = true
+        rescue ActiveRecord::RecordNotFound
+          response['success'] = false
+          response['error'] = 'notFound'
+        end
+      else
+        response['success'] = false
+        response['error'] = 'invalid'
+      end
+    rescue ArgumentError
+       response['success'] = false
+       response['error'] = 'invalidParams'
+    end
+    response.to_json
+  end
+  post '/insult/:id/delete' do
+    response = {}
+    begin
+      id = Integer(params[:id])
+      if warden_handler.authenticated? or current_user.admin
+        begin
+          if current_user.admin
+            Insult.find(id).destroy
+          else
+            current_user.insults.find(id).destroy
+          end
+          response['success'] = true
+        rescue ActiveRecord::RecordNotFound
+          response['success'] = false
+          response['error'] = 'notFound'
+        end
+      else
+        response['success'] = false
+        response['error'] = 'invalid'
+      end
+    rescue ArgumentError
+      response['success'] = false
+      response['error'] = 'invalidParams'
+    end
+    response.to_json
+  end
   
   get '/profile' do
       redirect href('/login', {'continue' => '/profile'}) unless warden_handler.authenticated?
@@ -128,9 +188,9 @@ class InsultsApp < Sinatra::Base
           u.email = email
           u.password = Digest::SHA1.hexdigest("#{salt}#{password}")
         end
-  
+
         env['warden'].set_user(user)
-        
+
         if warden_handler.authenticated?
           redirect href('/')
         else
@@ -214,8 +274,7 @@ class InsultsApp < Sinatra::Base
     end
     
     def insult(insult_str)
-      username = (current_user.alias.nil?)? current_user.username : current_user.alias
-      h(insult_str.gsub('<NICK>', username))
+      h(insult_str.gsub('<NICK>', current_user.handle))
     end
     
     def date(date_str)

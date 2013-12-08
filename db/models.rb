@@ -4,6 +4,14 @@ class User < ActiveRecord::Base
 
   has_many :insults, :inverse_of => :user, :foreign_key => 'author_id'
   
+  def handle
+    (read_attribute(:alias).nil?)? read_attribute(:username) : read_attribute(:alias)  
+  end
+
+  def insults_ordered_by_creation
+    insults.order(:created_at)
+  end
+  
   def self.authenticate(query, attempted_password)
     user = (query.include? '@') ? self.where('email = ?', query) : self.where('username = ?', query)
     user = user.first
@@ -22,5 +30,9 @@ class Insult < ActiveRecord::Base
 
   def self.published
     where('published' => true)
+  end
+
+  def self.approved_and_published
+    where({'approved' => true, 'published' => true})
   end
 end
