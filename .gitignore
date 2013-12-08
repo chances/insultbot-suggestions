@@ -6,6 +6,7 @@ database.yml
 database.log
 dispatch.fcgi
 Gemfile*
+favicon*.png
 
 *~
 

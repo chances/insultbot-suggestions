@@ -50,7 +50,7 @@
 <div class="container">
 	<div class="inset panel panel-default">
 		<h2>Your Insults</h2>
-		<table class="table table-striped">
+		<table id="insults" class="table table-striped">
 			<thead>
 				<tr>
 					<!-- Approved -->
@@ -65,7 +65,7 @@
 					<td class="fit-to-content"><span class="glyphicon <%= (@insult.approved) ? 'glyphicon-ok' : 'glyphicon-remove' %>" title="<%= (@insult.approved) ? 'Approved' : ((@insult.published) ? 'Denied' : 'Awaiting Approval') %>"></span></td>
 					<td><%=insult @insult.insult %></td>
 					<td><%=date @insult.created_at %></td>
-					<td class="fit-to-content"><button class="btn btn-sm btn-default edit">Edit</button><button class="btn btn-sm btn-danger delete">Delete</button><button class="btn btn-sm btn-primary save">Save</button><button class="btn btn-sm btn-default cancel">Cancel</button></td>
+					<td class="fit-to-content"><button class="btn btn-sm btn-default not-editing edit">Edit</button><button class="btn btn-sm btn-danger not-editing delete">Delete</button><button class="btn btn-sm btn-primary editing save">Save</button><button class="btn btn-sm btn-default editing cancel">Cancel</button></td>
 				</tr>
 				<% end %>
 			</tbody>

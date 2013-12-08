@@ -68,4 +68,23 @@ $(function () {
         	$error.hide();
         }
 	});
+	
+	//Insult list stuffs
+	var $insults = $('#insults');
+	
+	$insults.find('tbody > tr').each(function () {
+		$(this).find('.editing').hide();
+		$(this).find('.edit').click(function () {
+			$(this).parent().find('.not-editing').hide();
+			$(this).parent().find('.editing').show();
+		});
+		$(this).find('.cancel').click(function () {
+			$(this).parent().find('.editing').hide();
+			$(this).parent().find('.not-editing').show();
+		});
+		$(this).find('.save').click(function () {
+			//$(this).parent().find('.editing').hide();
+			//$(this).parent().find('.not-editing').show();
+		});
+	});
 });
