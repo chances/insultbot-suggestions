@@ -3,16 +3,16 @@
     <head>
         <title>InsultBot</title>
         
-        <link rel="shortcut icon" href="<%= href('/favicon.ico') %>" type="image/x-icon" />
+        <link rel="shortcut icon" href="<%= href('favicon.ico') %>" type="image/x-icon" />
 
         <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-theme.min.css">
-        <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="<%= href('css/main.css') %>">
 
-        <script src="js/zepto.min.js"></script>
-        <script src="js/zepto-data.js"></script>
-        <script src="js/zepto-fx.js"></script>
-        <script src="js/modal.js"></script>
+        <script src="<%= href('js/zepto.min.js') %>"></script>
+        <script src="<%= href('js/zepto-data.js') %>"></script>
+        <script src="<%= href('js/zepto-fx.js') %>"></script>
+        <script src="<%= href('js/modal.js') %>"></script>
         <%= get_scripts %>
     </head>
     <body>

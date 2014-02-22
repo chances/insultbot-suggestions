@@ -127,6 +127,39 @@ class InsultsApp < Sinatra::Base
     end
     response.to_json
   end
+  get '/insult/random' do
+    insult = Insult.random
+    if params['format'] == 'json'
+      content_type :json
+      if insult.nil?
+        {'status' => 'error', 'code' => 'NO_RESULTS'}.to_json
+      else
+        {'status' => 'success', 'insult' => insult.insult}.to_json
+      end
+    elsif params['format'] == 'text'
+      content_type :text
+      if insult.nil?
+        ""
+      else
+        insult.insult
+      end
+    else
+      if insult.nil?
+        @request = request
+        @status_code = '503'
+        @status = 'Random Insult'
+        @message = 'There are no insults available.'
+        erb :error
+      else
+        if warden_handler.authenticated?
+          @insult = insult(insult.insult)
+        else
+          @insult = h(insult.insult.gsub('<NICK>', 'you'))
+        end
+        erb :insult
+      end
+    end
+  end
   post '/insult/:id/delete' do
     response = {}
     begin
@@ -240,11 +273,11 @@ class InsultsApp < Sinatra::Base
       path = request.path_info
       case path
       when '/'
-        (show_sign_in) ? template.erb({:scripts => ['js/signup.js']}) : template.erb({:scripts => ['js/submit.js']})
+        (show_sign_in) ? template.erb({:scripts => [href('js/signup.js')]}) : template.erb({:scripts => [href('js/submit.js')]})
       when '/signup'
-        template.erb({:scripts => ['js/signup.js']})
+        template.erb({:scripts => [href('js/signup.js')]})
       when '/login'
-        template.erb({:scripts => ['js/login.js']})
+        template.erb({:scripts => [href('js/login.js')]})
       else
         ''
       end
@@ -252,6 +285,8 @@ class InsultsApp < Sinatra::Base
 
     def href(reference, hash={})
       return '#' if request.path_info == reference && hash.empty?
+      #Add preceding slash if needed
+      reference = "/#{reference}" unless reference.starts_with?('/')
       url = "/~chances/insults#{reference}"
       url_args = ''
       if hash.empty?

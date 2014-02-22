@@ -35,4 +35,8 @@ class Insult < ActiveRecord::Base
   def self.approved_and_published
     where({'approved' => true, 'published' => true})
   end
+  
+  def self.random
+    where({'approved' => true, 'published' => true}).first(:order => "RANDOM()")
+  end
 end
