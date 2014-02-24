@@ -43,6 +43,9 @@ class InsultsApp < Sinatra::Base
   end
 
   configure do
+    #Set log level
+    set :logging, Logger::DEBUG
+    #set :logging, Logger::WARN
     #Setup active record with Sinatra
     set :database_file, 'database.yml'
   end
@@ -162,6 +165,56 @@ class InsultsApp < Sinatra::Base
       end
     end
   end
+  get '/insult/:id/approve' do
+    response = {}
+    begin
+      id = Integer(params[:id])
+      if warden_handler.authenticated? and current_user.admin
+        begin
+          insult = Insult.find(id)
+          insult.approved = true
+          insult.published = true
+          insult.save
+          response['success'] = true
+        rescue ActiveRecord::RecordNotFound
+          response['success'] = false
+          response['error'] = 'notFound'
+        end
+      else
+        response['success'] = false
+        response['error'] = 'invalid'
+      end
+    rescue ArgumentError
+      response['success'] = false
+      response['error'] = 'invalidParams'
+    end
+    response.to_json
+  end
+  get '/insult/:id/disapprove' do
+    response = {}
+    begin
+      id = Integer(params[:id])
+      if warden_handler.authenticated? and current_user.admin
+        begin
+          insult = Insult.find(id)
+          insult.approved = false
+          insult.published = true
+          insult.save
+          response['success'] = true
+        rescue ActiveRecord::RecordNotFound
+          response['success'] = false
+          response['error'] = 'notFound'
+        end
+      else
+        response['success'] = false
+        response['error'] = 'invalid'
+      end
+    rescue ArgumentError
+      response['success'] = false
+      response['error'] = 'invalidParams'
+    end
+    response.to_json
+  end
   post '/insult/:id/delete' do
     response = {}
     begin
@@ -194,8 +247,21 @@ class InsultsApp < Sinatra::Base
 
     erb :profile
   end
+  get '/profile/delete' do
+    redirect href('/login', {'continue' => '/profile'}) unless warden_handler.authenticated?
+
+    #TODO: Implement profile deletion
+
+    redirect href('/profile')
+  end
   post '/profile/:id' do
     redirect href('/login', {'continue' => '/profile'}) unless warden_handler.authenticated?
+
+    params_alias = params[:alias]
+
+    current_user.alias = params_alias.empty? ? nil : params_alias
+    current_user.email = params[:email]
+    current_user.save
 
     redirect href('/profile')
   end
@@ -301,6 +367,8 @@ class InsultsApp < Sinatra::Base
         template.erb({:scripts => [href('js/signup.js')]})
       when '/login'
         template.erb({:scripts => [href('js/login.js')]})
+        when '/profile'
+          template.erb({:scripts => [href('js/profile.js')]})
       else
         ''
       end

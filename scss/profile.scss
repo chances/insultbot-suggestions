@@ -1,4 +1,5 @@
 @import "base";
+@import "animate";
 
 h2 {
   margin-top: 0;
@@ -17,6 +18,11 @@ h2 {
 
 .panel-body > .table-striped {
   margin-bottom: 0;
+}
+
+.table-striped tr > th:first-child,
+.table-striped tr > td:first-child {
+  padding-left: 12px;
 }
 
 .table-striped > tbody > tr > td {
@@ -40,9 +46,27 @@ h2 {
     &:focus {
       opacity: 1;
     }
+    &:disabled {
+      opacity: 0;
+    }
   }
+}
+
+.table-striped > tbody > tr.loading * {
+  cursor: wait !important;
+}
+
+.table-striped > tbody > tr.loading > td {
+  color: rgba(#333, 0.65);
 }
 
 .table-striped > tbody > tr:hover > td > button {
   opacity: 1;
+}
+.table-striped > tbody > tr:hover > td > button:disabled {
+  opacity: 0.65;
+}
+
+.modal {
+  overflow: hidden;
 }
