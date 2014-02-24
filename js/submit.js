@@ -84,7 +84,7 @@ $(function () {
 				$insult = $actions.parent().find('td.insult'),
                 $form = $('<form class="form-group" method="post"></form>'),
 				insult = $insult.data('insult'),
-                insultId = $insult.parent().data('insult-id'),
+                insultId = $row.data('insult-id'),
                 handle = $insults.data('handle'),
                 $input = $('<input class="form-control" type="text" name="insult" value="' + insult + '">');
 			$actions.find('.not-editing').css('display', 'none');
@@ -146,17 +146,18 @@ $(function () {
         $(this).find('.delete').click(function () {
             var $actions = $(this).parent(),
                 $row = $actions.parent(),
-                $insult = $actions.parent().find('td.insult'),
+                $insult = $row.find('td.insult'),
                 insult = $insult.data('insult'),
-                insultId = $insult.parent().data('insult-id');
+                insultId = $row.data('insult-id');
             $delete.off('click').on('click', function () {
-                $delete.attr('disabled','');
+                $deleteDialog.addClass('loading').find('button').attr('disabled','');
                 $.post('/~chances/insults/insult/' + insultId + '/delete', function (response) {
                     response = JSON.parse(response);
-                    $deleteDialog.modal('hide');
-                    $delete.removeAttr('disabled');
+                    $deleteDialog.removeClass('loading').modal('hide');
                     if (response.success === true) {
                         $row.remove();
+                    } else {
+                        $deleteDialog.find('button').removeAttr('disabled');
                     }
                 });
             });
