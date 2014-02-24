@@ -1,7 +1,6 @@
 .project
 .settings/
 .sass-cache/
-scss/
 
 cgi.log
 database.yml
