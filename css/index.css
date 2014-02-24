@@ -1,10 +1,100 @@
-/* line 3, ../scss/index.scss */
+/* line 1, ../scss/_animate.scss */
+.animated {
+  -webkit-animation-fill-mode: both;
+  -moz-animation-fill-mode: both;
+  -ms-animation-fill-mode: both;
+  -o-animation-fill-mode: both;
+  animation-fill-mode: both;
+  -webkit-animation-duration: 0.6s;
+  -moz-animation-duration: 0.6s;
+  -ms-animation-duration: 0.6s;
+  -o-animation-duration: 0.6s;
+  animation-duration: 0.6s;
+}
+
+@-webkit-keyframes shake {
+  /* line 15, ../scss/_animate.scss */
+  0%, 100% {
+    -webkit-transform: translateX(0);
+  }
+
+  /* line 16, ../scss/_animate.scss */
+  15%, 45%, 75%, 95% {
+    -webkit-transform: translateX(-10px);
+  }
+
+  /* line 17, ../scss/_animate.scss */
+  30%, 60%, 90% {
+    -webkit-transform: translateX(10px);
+  }
+}
+
+@-moz-keyframes shake {
+  /* line 21, ../scss/_animate.scss */
+  0%, 100% {
+    -moz-transform: translateX(0);
+  }
+
+  /* line 22, ../scss/_animate.scss */
+  10%, 30%, 50%, 70%, 90% {
+    -moz-transform: translateX(-10px);
+  }
+
+  /* line 23, ../scss/_animate.scss */
+  20%, 40%, 60%, 80% {
+    -moz-transform: translateX(10px);
+  }
+}
+
+@-o-keyframes shake {
+  /* line 27, ../scss/_animate.scss */
+  0%, 100% {
+    -o-transform: translateX(0);
+  }
+
+  /* line 28, ../scss/_animate.scss */
+  10%, 30%, 50%, 70%, 90% {
+    -o-transform: translateX(-10px);
+  }
+
+  /* line 29, ../scss/_animate.scss */
+  20%, 40%, 60%, 80% {
+    -o-transform: translateX(10px);
+  }
+}
+
+@keyframes shake {
+  /* line 33, ../scss/_animate.scss */
+  0%, 100% {
+    transform: translateX(0);
+  }
+
+  /* line 34, ../scss/_animate.scss */
+  10%, 30%, 50%, 70%, 90% {
+    transform: translateX(-10px);
+  }
+
+  /* line 35, ../scss/_animate.scss */
+  20%, 40%, 60%, 80% {
+    transform: translateX(10px);
+  }
+}
+
+/* line 38, ../scss/_animate.scss */
+.shake {
+  -webkit-animation-name: shake;
+  -moz-animation-name: shake;
+  -o-animation-name: shake;
+  animation-name: shake;
+}
+
+/* line 4, ../scss/index.scss */
 #content > .container.fixed {
   position: fixed;
   width: 100%;
 }
 
-/* line 8, ../scss/index.scss */
+/* line 9, ../scss/index.scss */
 #content > .container:not(#error) {
   margin-bottom: 40px;
   padding: 0 15px 15px 15px;
@@ -15,13 +105,13 @@
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.45), inset 0 -4px 2px rgba(0, 0, 0, 0.55);
   z-index: 2;
 }
-/* line 18, ../scss/index.scss */
+/* line 19, ../scss/index.scss */
 #content > .container:not(#error) .inset {
   margin: 0;
   padding: 15px;
 }
 
-/* line 24, ../scss/index.scss */
+/* line 25, ../scss/index.scss */
 .jumbotron {
   color: #FFFFFF;
   text-shadow: 0 1px 5px #222222;
@@ -31,7 +121,7 @@
   -moz-box-shadow: 0 8px 20px rgba(0, 0, 0, 0.45), inset 0 -4px 2px rgba(0, 0, 0, 0.55);
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.45), inset 0 -4px 2px rgba(0, 0, 0, 0.55);
 }
-/* line 32, ../scss/index.scss */
+/* line 33, ../scss/index.scss */
 .jumbotron.landing:not(.no-insults) {
   margin: 0;
   -moz-box-shadow: 0 8px 20px rgba(0, 0, 0, 0.45);
@@ -39,11 +129,11 @@
   border-radius: 0;
   z-index: 1;
 }
-/* line 39, ../scss/index.scss */
+/* line 40, ../scss/index.scss */
 .jumbotron h1 {
   margin-top: 0;
 }
-/* line 42, ../scss/index.scss */
+/* line 43, ../scss/index.scss */
 .jumbotron .panel-form {
   font-size: 14px;
   margin: 0 0 0 5px;

@@ -1,116 +1,26 @@
-/* line 1, ../scss/_animate.scss */
-.animated {
-  -webkit-animation-fill-mode: both;
-  -moz-animation-fill-mode: both;
-  -ms-animation-fill-mode: both;
-  -o-animation-fill-mode: both;
-  animation-fill-mode: both;
-  -webkit-animation-duration: 0.6s;
-  -moz-animation-duration: 0.6s;
-  -ms-animation-duration: 0.6s;
-  -o-animation-duration: 0.6s;
-  animation-duration: 0.6s;
-}
-
-@-webkit-keyframes shake {
-  /* line 15, ../scss/_animate.scss */
-  0%, 100% {
-    -webkit-transform: translateX(0);
-  }
-
-  /* line 16, ../scss/_animate.scss */
-  15%, 45%, 75%, 95% {
-    -webkit-transform: translateX(-10px);
-  }
-
-  /* line 17, ../scss/_animate.scss */
-  30%, 60%, 90% {
-    -webkit-transform: translateX(10px);
-  }
-}
-
-@-moz-keyframes shake {
-  /* line 21, ../scss/_animate.scss */
-  0%, 100% {
-    -moz-transform: translateX(0);
-  }
-
-  /* line 22, ../scss/_animate.scss */
-  10%, 30%, 50%, 70%, 90% {
-    -moz-transform: translateX(-10px);
-  }
-
-  /* line 23, ../scss/_animate.scss */
-  20%, 40%, 60%, 80% {
-    -moz-transform: translateX(10px);
-  }
-}
-
-@-o-keyframes shake {
-  /* line 27, ../scss/_animate.scss */
-  0%, 100% {
-    -o-transform: translateX(0);
-  }
-
-  /* line 28, ../scss/_animate.scss */
-  10%, 30%, 50%, 70%, 90% {
-    -o-transform: translateX(-10px);
-  }
-
-  /* line 29, ../scss/_animate.scss */
-  20%, 40%, 60%, 80% {
-    -o-transform: translateX(10px);
-  }
-}
-
-@keyframes shake {
-  /* line 33, ../scss/_animate.scss */
-  0%, 100% {
-    transform: translateX(0);
-  }
-
-  /* line 34, ../scss/_animate.scss */
-  10%, 30%, 50%, 70%, 90% {
-    transform: translateX(-10px);
-  }
-
-  /* line 35, ../scss/_animate.scss */
-  20%, 40%, 60%, 80% {
-    transform: translateX(10px);
-  }
-}
-
-/* line 38, ../scss/_animate.scss */
-.shake {
-  -webkit-animation-name: shake;
-  -moz-animation-name: shake;
-  -o-animation-name: shake;
-  animation-name: shake;
-}
-
-/* line 4, ../scss/main.scss */
+/* line 3, ../scss/main.scss */
 body {
   background: #F2F4F4;
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15), 0 1px 2px rgba(0, 0, 0, 0.075);
 }
 
-/* line 9, ../scss/main.scss */
+/* line 8, ../scss/main.scss */
 .navbar {
   background-image: none;
   background: #F3F3F3;
   box-shadow: none;
 }
-/* line 14, ../scss/main.scss */
+/* line 13, ../scss/main.scss */
 .navbar .navbar-nav > .active > a {
   background-color: #f2f2f2;
 }
 
-/* line 19, ../scss/main.scss */
+/* line 18, ../scss/main.scss */
 .navbar-header {
   padding-left: 15px;
 }
 
-/* line 23, ../scss/main.scss */
+/* line 22, ../scss/main.scss */
 .navbar-default .navbar-brand {
   font-weight: bolder;
   padding-left: 50px;
@@ -122,46 +32,46 @@ body {
   cursor: pointer;
 }
 
-/* line 34, ../scss/main.scss */
+/* line 33, ../scss/main.scss */
 .navbar-collapse .navbar-text {
   margin-right: 15px !important;
 }
 
-/* line 38, ../scss/main.scss */
+/* line 37, ../scss/main.scss */
 .container {
   width: auto;
   max-width: 1024px;
   padding: 0 15px;
 }
 
-/* line 44, ../scss/main.scss */
+/* line 43, ../scss/main.scss */
 #content {
   padding-top: 51px;
 }
 
-/* line 48, ../scss/main.scss */
+/* line 47, ../scss/main.scss */
 #error {
   margin-top: 12px;
 }
 
-/* line 53, ../scss/main.scss */
+/* line 52, ../scss/main.scss */
 .glyphicon-ok,
 .glyphicon-ok-circle {
   color: green;
 }
 
-/* line 57, ../scss/main.scss */
+/* line 56, ../scss/main.scss */
 .glyphicon-warning-sign {
   color: #EC971F;
 }
 
-/* line 62, ../scss/main.scss */
+/* line 61, ../scss/main.scss */
 .glyphicon-exclamation-sign,
 .glyphicon-remove {
   color: #C9302C;
 }
 
-/* line 66, ../scss/main.scss */
+/* line 65, ../scss/main.scss */
 .panel-form {
   text-shadow: none;
   margin: 65px auto;
@@ -169,16 +79,16 @@ body {
   -moz-animation-duration: 0.5s;
   -ms-animation-duration: 0.5s;
 }
-/* line 73, ../scss/main.scss */
+/* line 72, ../scss/main.scss */
 .panel-form .form-group {
   color: #333;
 }
-/* line 76, ../scss/main.scss */
+/* line 75, ../scss/main.scss */
 .panel-form .help-block {
   color: #737373 !important;
 }
 
-/* line 81, ../scss/main.scss */
+/* line 80, ../scss/main.scss */
 .clearfix:after {
   clear: both;
   *zoom: 1;
