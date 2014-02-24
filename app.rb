@@ -229,7 +229,6 @@ class InsultsApp < Sinatra::Base
         end
       else
         #Fail
-        @request = request
         @success = false
         erb :home
       end
