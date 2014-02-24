@@ -269,6 +269,29 @@ class InsultsApp < Sinatra::Base
   end
 
   helpers do
+    def get_styles
+      template = File.read('templates/styles.erb')
+      path = request.path_info
+      case path
+        when '/'
+          styles = [href('css/index.css')]
+          if show_sign_in
+            styles.push(href('css/signup.css'))
+          else
+            styles.push(href('css/submit.css'))
+          end
+          template.erb({:styles => styles})
+        when '/login'
+          template.erb({:styles => [href('css/login.css')]})
+        when '/profile'
+          template.erb({:styles => [href('css/profile.css')]})
+        when '/help'
+          template.erb({:styles => [href('css/help.css')]})
+        else
+          ''
+      end
+    end
+
     def get_scripts
       template = File.read('templates/scripts.erb')
       path = request.path_info

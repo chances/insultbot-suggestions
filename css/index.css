@@ -1,0 +1,55 @@
+/* line 3, ../scss/index.scss */
+#content > .container.fixed {
+  position: fixed;
+  width: 100%;
+}
+
+/* line 8, ../scss/index.scss */
+#content > .container:not(#error) {
+  margin-bottom: 40px;
+  padding: 0 15px 15px 15px;
+  background-color: #455459;
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
+  -moz-box-shadow: 0 8px 20px rgba(0, 0, 0, 0.45), inset 0 -4px 2px rgba(0, 0, 0, 0.55);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.45), inset 0 -4px 2px rgba(0, 0, 0, 0.55);
+  z-index: 2;
+}
+/* line 18, ../scss/index.scss */
+#content > .container:not(#error) .inset {
+  margin: 0;
+  padding: 15px;
+}
+
+/* line 24, ../scss/index.scss */
+.jumbotron {
+  color: #FFFFFF;
+  text-shadow: 0 1px 5px #222222;
+  margin-top: 25px;
+  background-color: #455459;
+  min-height: 383px;
+  -moz-box-shadow: 0 8px 20px rgba(0, 0, 0, 0.45), inset 0 -4px 2px rgba(0, 0, 0, 0.55);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.45), inset 0 -4px 2px rgba(0, 0, 0, 0.55);
+}
+/* line 32, ../scss/index.scss */
+.jumbotron.landing:not(.no-insults) {
+  margin: 0;
+  -moz-box-shadow: 0 8px 20px rgba(0, 0, 0, 0.45);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.45);
+  border-radius: 0;
+  z-index: 1;
+}
+/* line 39, ../scss/index.scss */
+.jumbotron h1 {
+  margin-top: 0;
+}
+/* line 42, ../scss/index.scss */
+.jumbotron .panel-form {
+  font-size: 14px;
+  margin: 0 0 0 5px;
+  position: relative;
+  top: 0px;
+  width: 350px;
+  -moz-transition: top 0.3s ease;
+  transition: top 0.3s ease;
+}

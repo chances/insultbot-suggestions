@@ -1,0 +1,19 @@
+/* line 3, ../scss/help.scss */
+.code pre {
+  color: #DDD;
+  margin: 0 auto 10px auto;
+  max-width: 75%;
+  background-color: #000000;
+}
+/* line 9, ../scss/help.scss */
+.code pre span.bold {
+  font-weight: bold;
+}
+/* line 12, ../scss/help.scss */
+.code pre span.emphasis {
+  color: #0F0;
+}
+/* line 16, ../scss/help.scss */
+.code pre span.desc {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}

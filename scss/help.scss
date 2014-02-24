@@ -1,0 +1,19 @@
+@import "base";
+
+.code pre {
+  color: #DDD;
+  margin: 0 auto 10px auto;
+  max-width: 75%;
+  background-color: #000000;
+
+  span.bold {
+    font-weight: bold;
+  }
+  span.emphasis {
+    color: #0F0;
+  }
+
+  span.desc {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  }
+}

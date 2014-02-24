@@ -1,0 +1,8 @@
+/* line 3, ../scss/signup.scss */
+#signupPanel {
+  top: 10px;
+}
+/* line 6, ../scss/signup.scss */
+#signupPanel.center-vert {
+  top: 26px;
+}

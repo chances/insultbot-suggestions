@@ -1,0 +1,9 @@
+@import "base";
+
+#signupPanel {
+  top: 10px;
+
+  &.center-vert {
+    top: 26px;
+  }
+}
