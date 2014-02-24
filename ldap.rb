@@ -19,12 +19,20 @@ module Insults
         #Success, get their email
         filter = Net::LDAP::Filter.eq("uid", username)
         treebase = "ou=People,dc=cat,dc=pdx,dc=edu"
-        user = ldap.search(:base => treebase, :filter => filter).first
-        email = (not user['mailRoutingAddress'].empty?) ? user.mailRoutingAddress.first : user.mail.first
-        return email
+        begin
+          user = ldap.search(:base => treebase, :filter => filter).first
+          #Ensure the person is a catzen
+          return false unless user.pod.include?('cat')
+          #Get their email
+          email = (not user.mailRoutingAddress.empty?) ? user.mailRoutingAddress.first : user.mail.first
+          return email
+        rescue
+          #Failed to authenticate
+          return false
+        end
       else
         #Failed to authenticate
-        return false
+        false
       end
     end
   end
