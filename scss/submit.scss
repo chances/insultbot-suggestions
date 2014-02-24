@@ -17,6 +17,14 @@
   top: 2px;
 }
 
+.table-striped > tbody > tr:last-child > td:first-child {
+  border-bottom-left-radius: 4px;
+}
+
+.table-striped > tbody > tr:last-child > td:last-child {
+  border-bottom-right-radius: 4px;
+}
+
 .table-striped > tbody > tr > td {
   vertical-align: middle;
 
@@ -38,9 +46,31 @@
     &:focus {
       opacity: 1;
     }
+    &:disabled {
+      opacity: 0;
+    }
   }
+}
+
+.table-striped > tbody > tr.loading * {
+  cursor: wait !important;
+}
+
+.table-striped > tbody > tr.loading > td {
+  color: rgba(#333, 0.65);
 }
 
 .table-striped > tbody > tr:hover > td > button {
   opacity: 1;
+}
+.table-striped > tbody > tr:hover > td > button:disabled {
+  opacity: 0.65;
+}
+
+#deleteModal {
+  overflow: hidden;
+
+  &.loading {
+    cursor: wait;
+  }
 }
