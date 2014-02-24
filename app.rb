@@ -47,15 +47,17 @@ class InsultsApp < Sinatra::Base
     set :database_file, 'database.yml'
   end
 
-  not_found do
+  before do
     @request = request
+  end
+
+  not_found do
     @status_code = 404
     @status = '404: Not Found'
     @message = "The page at #{request.url.split('?')[0]} was not found."
     erb :error
   end
   error 403 do
-    @request = request
     @status_code = 403
     @status = '403: Forbidden'
     @message = "You don't have permission to access #{request.url.split('?')[0]} on this server."
@@ -63,21 +65,17 @@ class InsultsApp < Sinatra::Base
   end
 
   get '/' do
-    @request = request
     erb :home
   end
   get '/help' do
-    @request = request
     erb :help
   end
   get '/about' do
-    @request = request
     erb :about
   end
   get '/report' do
     redirect href('/login', {'continue' => '/report'}) unless warden_handler.authenticated?
-    
-    @request = request
+
     @status_code = ''
     @status = 'Report an Insult <small>Coming Soon</small>'
     @message = 'This feature is coming soon.'
@@ -150,7 +148,6 @@ class InsultsApp < Sinatra::Base
       end
     else
       if insult.nil?
-        @request = request
         @status_code = '503'
         @status = 'Random Insult'
         @message = 'There are no insults available.'
@@ -195,7 +192,6 @@ class InsultsApp < Sinatra::Base
   get '/profile' do
     redirect href('/login', {'continue' => '/profile'}) unless warden_handler.authenticated?
 
-    @request = request
     erb :profile
   end
   post '/profile/:id' do
@@ -241,11 +237,9 @@ class InsultsApp < Sinatra::Base
   end
 
   get '/login' do
-    @request = request
     erb :login
   end
   post '/login' do
-    @request = request
     warden_handler.authenticate
     if warden_handler.authenticated?
       if params.has_key?('continue')
