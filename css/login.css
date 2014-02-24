@@ -1,10 +1,15 @@
 /* line 3, ../scss/login.scss */
+.alert-dismissable > .close {
+  margin-top: 2px;
+}
+
+/* line 7, ../scss/login.scss */
 #loginPanel {
   margin-top: 75px;
   width: 415px;
 }
 
-/* line 8, ../scss/login.scss */
+/* line 12, ../scss/login.scss */
 #login .text-danger {
   position: relative;
   top: 7px;

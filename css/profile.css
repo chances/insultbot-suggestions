@@ -1,17 +1,56 @@
 /* line 3, ../scss/profile.scss */
+h2 {
+  margin-top: 0;
+}
+
+/* line 7, ../scss/profile.scss */
 .panel-heading > h3 {
   font-size: 16px;
   margin-top: 2px;
   margin-bottom: 0;
 }
 
-/* line 9, ../scss/profile.scss */
+/* line 13, ../scss/profile.scss */
 .btn-default-danger {
   color: #C9302C !important;
   font-weight: bold;
 }
 
-/* line 14, ../scss/profile.scss */
+/* line 18, ../scss/profile.scss */
 .panel-body > .table-striped {
   margin-bottom: 0;
+}
+
+/* line 22, ../scss/profile.scss */
+.table-striped > tbody > tr > td {
+  vertical-align: middle;
+}
+/* line 25, ../scss/profile.scss */
+.table-striped > tbody > tr > td.fit-to-content {
+  width: 1px;
+  white-space: nowrap;
+}
+/* line 29, ../scss/profile.scss */
+.table-striped > tbody > tr > td > form {
+  margin-bottom: 0;
+}
+/* line 32, ../scss/profile.scss */
+.table-striped > tbody > tr > td > button {
+  margin-right: 5px;
+  opacity: 0;
+  -moz-transition: opacity 0.3s ease;
+  transition: opacity 0.3s ease;
+}
+/* line 37, ../scss/profile.scss */
+.table-striped > tbody > tr > td > button:last-child {
+  margin: 0;
+}
+/* line 40, ../scss/profile.scss */
+.table-striped > tbody > tr > td > button:focus {
+  opacity: 1;
+}
+
+/* line 46, ../scss/profile.scss */
+.table-striped > tbody > tr:hover > td > button {
+  opacity: 1;
 }

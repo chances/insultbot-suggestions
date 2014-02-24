@@ -1,5 +1,9 @@
 @import "base";
 
+.alert-dismissable > .close {
+  margin-top: 2px;
+}
+
 #loginPanel {
   margin-top: 75px;
   width: 415px;
