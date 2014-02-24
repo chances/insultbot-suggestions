@@ -77,6 +77,17 @@ body {
     color: #C9302C;
 }
 
+.panel-heading > h3 {
+    font-size: 16px;
+    margin-top: 2px;
+    margin-bottom: 0;
+}
+
+.btn-default-danger {
+    color: #C9302C !important;
+    font-weight: bold;
+}
+
 .panel-form {
     margin: 65px auto;
 }
@@ -184,6 +195,10 @@ body {
 }
 .host h3 > .glyphicon-exclamation-sign {
     text-shadow: 0 0 1.5em rgba(201,48,44,0.8);
+}
+
+.panel-body > .table-striped {
+    margin-bottom: 0;
 }
 
 .table-striped > tbody > tr > td {

@@ -1,0 +1,115 @@
+<%
+   num_insults = current_user.insults.count
+   insult_count = current_user.insult_count
+%>
+<h1>Your Profile</h1>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-xs-12 col-md-8">
+      <div class="panel panel-default">
+        <div class="panel-heading"><h3>Account Settings</h3></div>
+        <div class="panel-body">
+          <form id="profile" data-id="<%= current_user.id %>" action="<%= href("/profile/#{current_user.id}") %>" method="post">
+            <div class="form-group">
+              <label>Username</label>
+
+              <p class="form-control-static"><%= current_user.username %></p>
+            </div>
+            <div class="form-group">
+              <label for="alias">Alias</label>
+              <input id="alias" class="form-control" name="alias" placeholder="insultbot" value="<%= current_user.alias %>"/>
+
+              <p class="help-block">An alias for your username, usually your IRC handle.</p>
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input id="email" class="form-control" name="email" placeholder="insultbot@cat.pdx.edu" value="<%= current_user.email %>"/>
+            </div>
+            <button type="submit" class="btn btn-primary">Update Profile</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-6 col-md-4">
+      <div class="panel panel-default">
+        <div class="panel-heading"><h3>Insult Statistics</h3></div>
+        <div class="panel-body">
+          <% if num_insults == 0 %>
+          <p>You have not submitted any insults.</p>
+          <% else %>
+          <div class="statistic">
+            <span class="col-sm-12 col-md-7">Insults submitted:</span>
+            <span class="col-sm-12 col-md-5"><%= "#{num_insults} #{num_insults == 1 ? 'insult' : 'insults'}" %></span>
+          </div>
+          <div class="statistic">
+            <span class="col-sm-12 col-md-7">Insults used:</span>
+            <span class="col-sm-12 col-md-5"><%= "#{insult_count} #{insult_count == 1 ? 'time' : 'times'}" %></span>
+          </div>
+          <% end %>
+        </div>
+      </div>
+      <div class="panel panel-danger">
+        <div class="panel-heading"><h3>Delete Account</h3></div>
+        <div class="panel-body">
+          <p>Deleting your account will delete <strong>all</strong> of your insults. Please be certain you wish to deprive your fellow gnarwals of your insults.</p>
+          <button class="btn btn-default btn-default-danger" data-toggle="modal" data-target="#deleteModal">Delete your account</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <% awaiting_insults = Insult.awaiting_approval %>
+  <% if current_user.admin and awaiting_insults.count > 0 %>
+  <div class="row">
+    <div class="col-xs-12">
+      <h2>Administrative Tasks</h2>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="panel panel-default">
+        <div class="panel-heading"><h3>Insults Awaiting Approval</h3></div>
+        <div class="panel-body">
+          <table id="insults" class="table table-striped" data-handle="<%= current_user.handle %>">
+            <thead>
+            <tr>
+              <td>Insult</td>
+              <td>Author</td>
+              <td>Submitted</td>
+              <!-- Approve/Disapprove -->
+            </tr>
+            </thead>
+            <tbody>
+            <% awaiting_insults.each do |insult| %>
+                <tr data-insult-id="<%= insult.id %>">
+                  <td class="insult" data-insult="<%= insult.insult %>"><%= insult insult.insult %></td>
+                  <td class="fit-to-content"><%= insult.user.handle %></td>
+                  <td class="fit-to-content"><%= date insult.created_at %></td>
+                  <td class="fit-to-content">
+                    <button class="btn btn-sm btn-success">Approve</button>
+                    <button class="btn btn-sm btn-danger">Disapprove</button>
+                  </td>
+                </tr>
+            <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <% end %>
+</div>
+
+<!-- Delete Confirmation Dialog -->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <p>Are you sure you wish to <strong>permanently</strong> delete your account?</p>
+      </div>
+      <div class="modal-footer">
+        <button id="delete" type="button" class="btn btn-danger">Delete</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>

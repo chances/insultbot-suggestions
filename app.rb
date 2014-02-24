@@ -129,6 +129,11 @@ class InsultsApp < Sinatra::Base
   end
   get '/insult/random' do
     insult = Insult.random
+    unless insult.nil?
+      user = insult.user
+      user.insult_count += 1
+      user.save
+    end
     if params['format'] == 'json'
       content_type :json
       if insult.nil?
@@ -188,14 +193,16 @@ class InsultsApp < Sinatra::Base
   end
   
   get '/profile' do
-      redirect href('/login', {'continue' => '/profile'}) unless warden_handler.authenticated?
-      
-      @request = request
-      @status_code = ''
-      @status = 'Your Profile <small>Coming Soon</small>'
-      @message = 'This page is coming soon.'
-      erb :error
-    end
+    redirect href('/login', {'continue' => '/profile'}) unless warden_handler.authenticated?
+
+    @request = request
+    erb :profile
+  end
+  post '/profile/:id' do
+    redirect href('/login', {'continue' => '/profile'}) unless warden_handler.authenticated?
+
+    redirect href('/profile')
+  end
 
   post '/signup' do
     username = params[:username]
@@ -208,12 +215,7 @@ class InsultsApp < Sinatra::Base
     else
       #Try to authenticate with CAT LDAP
       email = Insults::LDAP.authenticate(username, password)
-      if not email
-        #Fail
-        @request = request
-        @success = false
-        erb :home
-      else
+      if email
         #User exists in CAT LDAP
         #Add the user to our User database
         user = User.create do |u|
@@ -229,6 +231,11 @@ class InsultsApp < Sinatra::Base
         else
           redirect href('/login')
         end
+      else
+        #Fail
+        @request = request
+        @success = false
+        erb :home
       end
     end
   end

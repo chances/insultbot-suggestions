@@ -2,7 +2,7 @@ class User < ActiveRecord::Base
   validate :username, :email, :password, :presence => true
   self.table_name = "insults_users"
 
-  has_many :insults, :inverse_of => :user, :foreign_key => 'author_id'
+  has_many :insults, :inverse_of => :user, :foreign_key => 'author_id', :dependent => :destroy
   
   def handle
     (read_attribute(:alias).nil?)? read_attribute(:username) : read_attribute(:alias)  
@@ -35,7 +35,11 @@ class Insult < ActiveRecord::Base
   def self.approved_and_published
     where({'approved' => true, 'published' => true})
   end
-  
+
+  def self.awaiting_approval
+    where({'approved' => false, 'published' => false}).order(:created_at)
+  end
+
   def self.random
     where({'approved' => true, 'published' => true}).first(:order => "RANDOM()")
   end
