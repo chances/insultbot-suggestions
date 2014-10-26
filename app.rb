@@ -251,6 +251,9 @@ class InsultsApp < Sinatra::Base
     redirect href('/login', {'continue' => '/profile'}) unless warden_handler.authenticated?
 
     #TODO: Implement profile deletion
+    #user = current_user
+    #warden_handler.logout
+    #user.destroy
 
     redirect href('/profile')
   end
