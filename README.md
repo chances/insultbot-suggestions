@@ -1,5 +1,5 @@
-#InsultBot Suggestions
+# InsultBot Suggestions
 
-InsultBot Suggestions is a realtively simple Ruby-based web app
-that provides both documentation and a suggestion service for
-InsultBot.
+InsultBot Suggestions is a bare-bones Ruby web app that
+provides both documentation and an insult suggestion service
+for [InsultBot](https://github.com/chances/insultbot).
